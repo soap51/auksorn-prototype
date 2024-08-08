@@ -1,12 +1,12 @@
-import os
-from dotenv import load_dotenv
+import os 
 import streamlit as st 
 from langchain_openai import ChatOpenAI
 from langchain.prompts import  PromptTemplate
 from langchain.output_parsers.json import SimpleJsonOutputParser 
 
-load_dotenv()
-
+model_name = st.secrets["AI_MODEL"]
+api_key = st.secrets["AI_API_KEY"]
+ 
 st.header("Thai Quiz")
 json_parser = SimpleJsonOutputParser()
  
@@ -30,8 +30,8 @@ if "answer" not in st.session_state:
 
 def get_model():
     return ChatOpenAI(base_url='https://api.opentyphoon.ai/v1',
-                    model=os.getenv('AI_MODEL'),
-                    api_key=os.getenv('AI_API_KEY'),
+                    model=model_name,
+                    api_key=api_key,
                     temperature=0.5,)
 
 
